@@ -1,4 +1,4 @@
-![Screenshot 2024-11-14 142616](https://github.com/user-attachments/assets/7346edd0-48ea-4e57-9af1-4994b1bddfdb)[**Play Here!**](https://tic-tac-toe-kappa-flax.vercel.app/)
+[**Play Here!**](https://tic-tac-toe-kappa-flax.vercel.app/)
 
 A simple **Tic-Tac-Toe** game with two difficulties, one you can beat, and the other you can't.
 
