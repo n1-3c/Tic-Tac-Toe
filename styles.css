@@ -10,8 +10,55 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(135deg, #74ebd5, #acb6e5);
     font-family: 'Arial', sans-serif;
+    transition: background-color 0.5s;
+    background: linear-gradient(135deg, #f5f5f5, #e0e0e0); /* Default light neutral background */
+}
+
+/* Default styling for cells (no rotation or transformation applied) */
+.cell {
+    width: 100px;
+    height: 100px;
+    background-color: #fff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4em;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+/* Update for SVG elements with same color and shadow */
+.cell svg {
+    width: 60px;
+    height: 60px;
+    filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.2)); /* Subtle shadow */
+}
+
+/* Same color for both X and O, with a medium gray tone */
+.cell.x svg,
+.cell.o svg {
+    fill: #4a4a4a; /* Medium gray for both "X" and "O" */
+}
+
+/* Hover effect */
+.cell:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.05);
+}
+
+/* Default background for easy mode */
+body.easy-mode {
+    background: linear-gradient(135deg, #74ebd5, #acb6e5);
+}
+
+/* Intimidating background for hard mode */
+body.hard-mode {
+    background: linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b);
 }
 
 .container {
@@ -26,6 +73,10 @@ h1 {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+#difficulty {
+    margin-bottom: 20px;
+}
+
 #game-board {
     display: grid;
     grid-template-columns: repeat(3, 100px);
@@ -33,47 +84,120 @@ h1 {
     margin-bottom: 20px;
 }
 
-.cell {
-    width: 100px;
-    height: 100px;
-    background-color: #fff;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2em;
-    font-weight: bold;
-    color: #333;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s, background-color 0.3s;
+/* Adjusting the space between difficulty buttons */
+#difficulty {
+    margin-bottom: 20px;
+    display: flex; /* Use flexbox to align buttons in a row */
+    justify-content: center; /* Center buttons horizontally */
+    gap: 10px; /* Set a small gap between the buttons */
 }
 
-.cell:hover {
-    background-color: #f0f0f0;
-    transform: scale(1.05);
-}
-
-button {
+/* Easy Mode Button with Flowing Gradient */
+#easy-mode {
     padding: 10px 20px;
     font-size: 1em;
     color: #fff;
-    background-color: #4caf50;
+    font-weight: bold;
+    background: linear-gradient(135deg, #74ebd5, #acb6e5);
+    background-size: 400% 400%;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s;
+    animation: gradient-flow 5s ease infinite; /* Flowing gradient animation */
+    transition: transform 0.3s ease; /* Smooth transition for scaling */
 }
 
-button:hover {
-    background-color: #45a049;
+#easy-mode:hover {
+    transform: scale(1.05); /* Slightly scale on hover */
 }
+
+/* Hard Mode Button with Flowing Gradient */
+#hard-mode {
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff;
+    font-weight: bold;
+    background: linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b);
+    background-size: 400% 400%;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: gradient-flow 5s ease infinite; /* Flowing gradient animation */
+    transition: transform 0.3s ease; /* Smooth transition for scaling */
+}
+
+#hard-mode:hover {
+    transform: scale(1.05); /* Slightly scale on hover */
+}
+
+/* Restart Button (Distinct with Flowing Gradient) */
+#restart {
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff;
+    font-weight: bold;
+    background: linear-gradient(135deg, #f39c12, #f1c40f);
+    background-size: 400% 400%;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: gradient-flow 5s ease infinite; /* Flowing gradient animation */
+    transition: transform 0.3s ease; /* Smooth transition for scaling */
+}
+
+#restart:hover {
+    transform: scale(1.05); /* Slightly scale on hover */
+}
+
+/* Gradient flow animation */
+@keyframes gradient-flow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+
+
+
+
+
 
 #status {
-    font-size: 1.2em;
-    color: #fff;
-    margin-top: 10px;
+    font-size: 1.5em; /* Size of the text */
+    color: #fcfcfc; /* Suitable text color (golden) */
+    font-weight: bold;
+    text-align: center;
+    padding: 5px 15px;
+    width: 80%; /* To ensure it’s not too wide */
+    margin: 0 auto; /* Center the status text */
+    position: fixed; /* Fix the status at the bottom */
+    bottom: 50px; /* Adjusted the position higher (50px from the bottom) */
+    left: 50%; /* Center it horizontally */
+    transform: translateX(-50%); /* Adjust for perfect centering */
+    animation: blink 3s infinite alternate; /* Slower blink (3 seconds) */
+    z-index: 100; /* Ensure the status message is above other content */
+}
+
+@keyframes blink {
+    0% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.6;
+    }
 }
 
 /* Winning cell styles */
